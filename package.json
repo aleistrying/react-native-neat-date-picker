@@ -1,5 +1,5 @@
 {
-  "name": "react-native-neat-date-picker",
+  "name": "rn-neat-date-picker",
   "version": "1.1.5",
   "description": "An easy-to-use date picker for React Native. Props to Roto93.",
   "main": "index.js",
