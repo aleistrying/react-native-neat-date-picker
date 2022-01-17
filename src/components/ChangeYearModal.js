@@ -3,13 +3,37 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import Modal from 'react-native-modal'
 import MDicon from 'react-native-vector-icons/MaterialIcons'
 
-const ChangeYearModal = ({ isVisible, dismiss, displayTime, setDisplayTime, colorOptions }) => {
+const ChangeYearModal = ({ isVisible, dismiss, displayTime, setDisplayTime, setOutput, output, mode, colorOptions }) => {
     const { primary, backgroundColor } = colorOptions
     const [year, setYear] = useState(displayTime.getFullYear());
     const onDismiss = () => {
         dismiss()
         let newDate = new Date(year, displayTime.getMonth(), displayTime.getDate())
         setDisplayTime(newDate)
+
+        const singleMode = mode === 'single'
+        const rangeMode = mode === 'range'
+        if (singleMode) {
+            const newOutPut = { ...output, date: newDate }
+            setOutput(newOutPut)
+            return
+        }
+
+
+        const shouldSetStartDate = !output.startDate
+            || output.endDate
+            || (newDate.getTime() < output.startDate?.getTime())
+
+
+        if (rangeMode) {
+            if (shouldSetStartDate) {
+                const newOutPut = { ...output, startDate: newDate, endDate: null, }
+                setOutput(newOutPut)
+            } else {
+                const newOutPut = { ...output, endDate: newDate }
+                setOutput(newOutPut)
+            }
+        }
     }
 
     return (

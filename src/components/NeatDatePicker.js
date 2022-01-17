@@ -229,6 +229,9 @@ const NeatDatePicker = ({
                     dismiss={() => { setShowChangeYearModal(false) }}
                     displayTime={displayTime}
                     setDisplayTime={setDisplayTime}
+                    setOutput={setOutput}
+                    output={output}
+                    mode={mode}
                     colorOptions={{
                         primary: changeYearModalColor,
                         backgroundColor
